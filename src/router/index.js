@@ -19,6 +19,11 @@ const routes = [
     name: 'moveCard',
     component: () => import('../views/hammer/moveCard')
   },
+  {
+    path: '/face',
+    name: 'face',
+    component: () => import('../views/face/index')
+  },
 ]
 
 const router = new VueRouter({

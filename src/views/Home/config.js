@@ -6,5 +6,9 @@ module.exports = [
   {
     name: '基于hammer的卡片移动',
     route: '/moveCard'
+  },
+  {
+    name: '前端人脸识别',
+    route: 'face'
   }
 ]

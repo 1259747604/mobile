@@ -5,6 +5,10 @@ import store from './store';
 import 'animate.css';
 import 'lodash';
 import { hammer } from './directive/hammer';
+import VConsole from 'vconsole';
+
+const vConsole = new VConsole();
+
 
 Vue.directive('hammer', hammer);
 
