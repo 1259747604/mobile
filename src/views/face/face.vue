@@ -10,6 +10,7 @@
 			<div class="inner">
 				<img src="../../assets/imgs/table.png" alt="" />
 				<video
+					ref="facevideo"
 					id="video"
 					class="face_video"
 					playsinline
@@ -27,6 +28,8 @@
 
 <script>
 import getUserMedia from './util';
+import tracking from 'tracking/build/tracking-min';
+import 'tracking/build/data/face-min';
 export default {
 	data() {
 		return {
@@ -35,7 +38,7 @@ export default {
 	},
 	mounted() {
 		getUserMedia(stream => {
-			const video = document.getElementById('video');
+			const video = this.$refs.facevideo;
 			try {
 				window.stream = stream;
 				video.srcObject = stream;
@@ -43,8 +46,43 @@ export default {
 				video.src = window.URL.createObjectURL(stream);
 			}
 			this.localMediaStream = stream;
-			video.play();
+			video.onloadedmetadata = () => {
+				video.play();
+				this.initTrack();
+			};
 		});
+	},
+	methods: {
+		initTrack() {
+			this.tracker = new window.tracking.ObjectTracker(['face']); // tracker实例
+			this.tracker.setStepSize(2);
+            this.tracker.setEdgesDensity(0.13)
+			this.tracker.on('track', this.handleTracked); // 绑定监听方法
+			try {
+				window.tracking.track('#video', this.tracker); // 开始追踪
+			} catch (e) {
+				this.operationTip = '访问用户媒体失败，请重试';
+			}
+		},
+		handleTracked(e) {
+			if (e.data.length === 0) {
+				this.operationTip = '未检测到人脸';
+			} else {
+				if (!this.tipFlag) {
+					this.operationTip = '检测成功，正在拍照，请保持不动2秒';
+				}
+				// 1秒后拍照，仅拍一次
+				if (!this.flag) {
+					this.operationTip = '拍照中...';
+					// this.flag = true;
+					// this.removePhotoID = setTimeout(() => {
+					// 	this.tackPhoto();
+					// 	this.tipFlag = true;
+					// }, 2000);
+				}
+				// e.data.forEach(this.plot);
+			}
+		},
 	},
 };
 </script>
@@ -80,11 +118,11 @@ export default {
 	overflow: hidden;
 	background: url('../../assets/imgs/out.png') no-repeat;
 	background-size: 100% 100%;
-    .inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
+	.inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
 	img {
 		position: absolute;
 		top: 0;
