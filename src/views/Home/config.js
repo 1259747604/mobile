@@ -9,6 +9,10 @@ module.exports = [
   },
   {
     name: '前端人脸识别',
-    route: 'face'
+    route: '/face'
+  },
+  {
+    name: '人脸识别',
+    route: '/newface'
   }
 ]

@@ -26,7 +26,7 @@ const adapter = () => {
 	}
 };
 
-const getUserMedia = (cb) => {
+const getUserMedia = cb => {
 	adapter();
 	if (window.stream) {
 		window.stream.getTracks().forEach(track => {
@@ -43,7 +43,7 @@ const getUserMedia = (cb) => {
 	navigator.mediaDevices
 		.getUserMedia(constraints)
 		.then(function(stream) {
-            cb(stream)
+			cb(stream);
 		})
 		.catch(function(err) {
 			console.log(err.name + ': ' + err.message);

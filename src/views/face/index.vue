@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<div>人脸识别</div>
+        <div @click="goface">goface</div>
         <input class="card_input" v-on:change="appCapture($event)" type="file" accept="image/*" capture="camera" />
 		<div class="video-container">
 			<div @click="moveToCameraAVG()" v-cloak>
@@ -77,6 +78,9 @@ export default {
 		},
         appCapture(e) {
             console.log("🚀 ~ file: index.vue ~ line 79 ~ appCapture ~ e", e)
+        },
+        goface() {
+            this.$router.push({name:"newface"})
         }
 	},
 	mounted() {
