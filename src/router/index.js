@@ -34,6 +34,11 @@ const routes = [
     name: 'imgface',
     component: () => import('../views/face/imgface')
   },
+  {
+    path: '/track',
+    name: 'track',
+    component: () => import('../views/face/track')
+  },
 ]
 
 const router = new VueRouter({

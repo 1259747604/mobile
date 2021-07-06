@@ -18,5 +18,9 @@ module.exports = [
   {
     name: '图片识别',
     route: '/imgface'
-  }
+  },
+  {
+    name: 'tracking.js实验',
+    route: '/track'
+  },
 ]
