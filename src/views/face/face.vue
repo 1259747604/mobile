@@ -18,6 +18,16 @@
 					x5-video-player-type="h5"
 				></video>
 			</div>
+			<div
+				class="rect"
+				v-for="item in profile"
+				:style="{
+					width: item.width + 'px',
+					height: item.height + 'px',
+					left: item.left + 'px',
+					top: item.top + 'px',
+				}"
+			></div>
 		</div>
 		<!-- 文字 -->
 		<div class="middle">我们正在收集您的面部特征信息</div>
@@ -34,10 +44,11 @@ export default {
 	data() {
 		return {
 			operationTip: '',
+			profile: [],
 		};
 	},
 	mounted() {
-		getUserMedia(stream => {
+		getUserMedia((stream) => {
 			const video = this.$refs.facevideo;
 			try {
 				window.stream = stream;
@@ -55,8 +66,8 @@ export default {
 	methods: {
 		initTrack() {
 			this.tracker = new window.tracking.ObjectTracker(['face']); // tracker实例
-			this.tracker.setStepSize(2);
-            this.tracker.setEdgesDensity(0.13)
+			this.tracker.setStepSize(1.7);
+			this.tracker.setEdgesDensity(0.13);
 			this.tracker.on('track', this.handleTracked); // 绑定监听方法
 			try {
 				window.tracking.track('#video', this.tracker); // 开始追踪
@@ -80,8 +91,12 @@ export default {
 					// 	this.tipFlag = true;
 					// }, 2000);
 				}
-				// e.data.forEach(this.plot);
+				e.data.forEach(this.plot);
 			}
+		},
+		plot({ x, y, width: w, height: h }) {
+			// 创建框对象
+			this.profile.push({ width: w, height: h, left: x, top: y });
 		},
 	},
 };
@@ -148,5 +163,11 @@ export default {
 	color: #666666;
 	text-align: center;
 	font-weight: 400;
+}
+
+.rect {
+	border: 2px solid #0aeb08;
+	position: fixed;
+	z-index: 3;
 }
 </style>

@@ -14,5 +14,9 @@ module.exports = [
   {
     name: '人脸识别',
     route: '/newface'
+  },
+  {
+    name: '图片识别',
+    route: '/imgface'
   }
 ]

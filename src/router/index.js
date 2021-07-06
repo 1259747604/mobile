@@ -29,6 +29,11 @@ const routes = [
     name: 'newface',
     component: () => import('../views/face/face')
   },
+  {
+    path: '/imgface',
+    name: 'imgface',
+    component: () => import('../views/face/imgface')
+  },
 ]
 
 const router = new VueRouter({

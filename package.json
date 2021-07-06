@@ -14,6 +14,7 @@
     "hammerjs": "^2.0.8",
     "lodash": "^4.17.21",
     "tracking": "^1.1.3",
+    "vconsole": "^3.8.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
