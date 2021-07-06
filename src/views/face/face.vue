@@ -14,6 +14,7 @@
 					id="video"
 					class="face_video"
 					autoplay
+                    playsinline
 					x5-video-player-type="h5"
 				></video>
 			</div>

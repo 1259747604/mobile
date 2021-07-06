@@ -15,6 +15,7 @@
 					class="face_video"
 					:width="w"
 					:height="h"
+                    playsinline
 					autoplay
 				></video>
 				<canvas class="canvas" :width="w" :height="h" ref="faceCanvas"></canvas>
