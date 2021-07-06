@@ -66,8 +66,9 @@ export default {
 	methods: {
 		initTrack() {
 			this.tracker = new window.tracking.ObjectTracker(['face']); // tracker实例
-			this.tracker.setStepSize(1.7);
-			this.tracker.setEdgesDensity(0.13);
+			this.tracker.setInitialScale(4);
+			this.tracker.setStepSize(2);
+			this.tracker.setEdgesDensity(0.1);
 			this.tracker.on('track', this.handleTracked); // 绑定监听方法
 			try {
 				window.tracking.track('#video', this.tracker); // 开始追踪
